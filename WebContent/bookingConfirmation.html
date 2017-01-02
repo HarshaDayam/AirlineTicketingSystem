@@ -1,0 +1,48 @@
+<table
+	class="table table-striped table-hover">
+	<thead class="header">
+		<tr>
+			<th>Booking Confirmation</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Confirmation Number:</td>
+			<td>{{ctrl.confirmationnum}}</td>
+		</tr>
+
+		<tr>
+			<td>Customer Name:</td>
+			<td>{{ctrl.confirmationdata.customerName}}</td>
+		</tr>
+		<tr>
+			<td>Departure Date:</td>
+			<td>{{ctrl.confirmationdata.departureDate }} </td>
+		</tr>
+		<tr>
+			<td>Arrive:</td>
+			<td>{{ctrl.confirmationdata.origin }} </td>
+		</tr>
+		<tr>
+			<td>Depart:</td>
+			<td>{{ctrl.confirmationdata.destination }}</td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td>{{ctrl.confirmationdata.email}}</td>
+		</tr>
+		<tr>
+			<td>Miles:</td>
+			<td>{{ctrl.confirmationdata.distance}}</td>
+		</tr>
+		<tr>
+			<td>Passengers:</td>
+			<td>{{ctrl.confirmationdata.passengers}}</td>
+		</tr>
+		<tr>
+			<td>Price:</td>
+			<td>{{ctrl.confirmationdata.totalPrice}}</td>
+		</tr>
+
+	</tbody>
+</table>

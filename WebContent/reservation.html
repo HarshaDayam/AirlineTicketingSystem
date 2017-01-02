@@ -1,0 +1,340 @@
+
+<form name="reservationForm" ng-submit="ctrl.continueReservation()"
+	class="form-horizontal" novalidate>
+	<div>
+		<table class="table table-striped content-table">
+			<tr>
+				<th>Ticket details</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>Origin</td>
+				<td>{{ctrl.flightdetails.origin}}</td>
+			</tr>
+			<tr>
+				<td>Destination</td>
+				<td>{{ctrl.flightdetails.destination}}</td>
+			</tr>
+			<tr>
+				<td>Duration</td>
+				<td>{{ctrl.flightdetails.duration}}</td>
+			</tr>
+
+			<tr>
+				<td>Ticket Price</td>
+				<td>{{ctrl.flightdetails.totalPrice}}</td>
+			</tr>
+			
+			<!-- <tr>
+				<td>Ticket Class</td>
+				<td>{{ctrl.flightdetails.ticketClass}}</td>
+			</tr> -->
+
+		</table>
+
+	</div>
+	<div>
+		<table class="table table-striped content-table"
+			ng-if="ctrl.oneway==false">
+			<tr>
+				<th>Return Ticket details</th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>Origin</td>
+				<td>{{ctrl.returnflight.origin}}</td>
+			</tr>
+			<tr>
+				<td>Destination</td>
+				<td>{{ctrl.returnflight.destination}}</td>
+			</tr>
+			<tr>
+				<td>Duration</td>
+				<td>{{ctrl.returnflight.duration}}</td>
+			</tr>
+			<tr>
+				<td>Ticket Price</td>
+				<td>{{ctrl.returnflight.totalPrice}}</td>
+			</tr>
+		</table>
+		<table class="table table-striped content-table"
+			ng-if="ctrl.oneway==false">
+			<tr>
+				<th>Total Price
+				</td>
+				<th>{{ctrl.totalprice}}
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+	<div ng-if="ctrl.editSection===true">
+
+		<fieldset>
+			<div>
+				<legend>Personal Information</legend>
+				<div class="form-group">
+					<label for="name" class="col-lg-2 control-label">Customer
+						Name:</label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="name" name="name"
+							required placeholder="Name" ng-model="ctrl.name" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.name.$error.required">Customer
+								Name is required.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="stAddress" class="col-lg-2 control-label">Street
+						Address:</label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="stAddress" required
+							name="staddress" placeholder="Address" ng-model="ctrl.staddress" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.staddress.$error.required">Street
+								Address is required.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="city" class="col-lg-2 control-label">City: </label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="city" name="city"
+							required placeholder="City" ng-model="ctrl.city" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.city.$error.required">City
+								is required.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="country" class="col-lg-2 control-label">Country:
+					</label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="country"
+							name="country" required placeholder="Country"
+							ng-model="ctrl.country" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.country.$error.required">Country
+								is required.</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<br /> <br />
+			<div>
+				<legend> Contact Information </legend>
+
+				<div class="form-group">
+					<label for="country" class="col-lg-2 control-label">Phone
+						Number: </label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="country" name="phone"
+							required placeholder="Phone number" ng-model="ctrl.phonenum" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.phone.$error.required">Phone
+								is required.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email" class="col-lg-2 control-label">E-mail: </label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="email" required
+							ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" name="email"
+							placeholder="Email" ng-model="ctrl.email" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.email.$error.required">Email
+								is required.</span> <span
+								ng-show="reservationForm.email.$error.pattern">Enter a
+								valid email.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="confirmemail" class="col-lg-2 control-label">Confirm
+						E-mail: </label>
+					<div class="col-lg-6">
+					
+					
+					
+					
+					
+					
+					
+						<input type="text" class="form-control" id="confirmemail" required
+							name="cemail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+							placeholder="Confirm Email" ng-model="ctrl.email2">
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.cemail.$error.required">Email
+								is required.</span> <span
+								ng-show="reservationForm.cemail.$error.pattern">Enter a
+								valid email.</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<legend> Passenger Information </legend>
+
+				<div ng-repeat="name in ctrl.passengerNames">
+					<div class="form-group">
+						<label for="passenger{{$index + 1}}"
+							class="col-lg-2 control-label"> Passenger {{$index + 1}}:
+						</label>
+						<div class="col-lg-6">
+							<input type="text" class="form-control" required
+								id="passenger{{$index + 1}}" placeholder="Passenger Name"
+								name="name{{$index}}" ng-model="name.name">
+							<p class="error-message"
+								ng-if="reservationForm.$invalid && reservationForm.$submitted">
+								<span ng-show="reservationForm.name{{$index}}.$error.required">Passenger
+									name is required.</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<legend> Payment Information </legend>
+
+				<div class="form-group">
+					<label for="creditcard" class="col-lg-2 control-label">Credit
+						Card Number: </label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="creditcard"
+							name="ccnum" required placeholder="Credit Card Number"
+							ng-model="ctrl.ccNumber" maxlength="15" minlength="15" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.ccnum.$error.required">Credit
+								card number is required.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="expyear" class="col-lg-2 control-label">Valid
+						Thru: </label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="expyear" name="expyr"
+							required placeholder="MM/YY" ng-model="ctrl.expyear"
+							maxlength="4" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.expyr.$error.required">Credit
+								card validity is required.</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="cvv" class="col-lg-2 control-label">CVV Number:
+					</label>
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="cvv" name="cvv"
+							required placeholder="3-digit CVV" ng-model="ctrl.cvv"
+							maxlength="4" />
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.cvv.$error.required">CVV is
+								required.</span>
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="checkbox col-lg-offset-2">
+
+						<input type="checkbox" required name="terms" ng-model="ctrl.terms" />
+						<a href="#/termsandconditions" target="_blank"> Terms and
+							conditions</a>
+						<p class="error-message"
+							ng-if="reservationForm.$invalid && reservationForm.$submitted">
+							<span ng-show="reservationForm.terms.$error.required">
+								Accept Terms & Conditions</span>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-lg-6 col-lg-offset-2">
+						<button type="reset" class="btn btn-default">Reset</button>
+						<button type="submit" class="btn btn-primary">Continue</button>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+
+
+	<div ng-if="ctrl.editSection===false">
+		<table class="table table-striped content-table">
+			<tr>
+				<th>Customer Details</th>
+
+			</tr>
+			<tr>
+				<td>Customer Name</td>
+				<td>{{ctrl.name}}</td>
+			</tr>
+			<tr>
+				<td>Street Address</td>
+				<td>{{ctrl.staddress}}</td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td>{{ctrl.city}}</td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td>{{ctrl.country}}</td>
+			</tr>
+			<tr>
+				<td>Phone Number</td>
+				<td>{{ctrl.phonenum}}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>{{ctrl.email}}</td>
+			</tr>
+
+			<tr ng-repeat="name in ctrl.passengerNames">
+				<td>Passenger {{$index + 1}}</td>
+				<td>{{name.name}}</td>
+			</tr>
+
+			<tr>
+				<td>Credit Card Number</td>
+				<td>{{ctrl.ccNumber}}</td>
+			</tr>
+			<tr>
+				<td>Valid Thru</td>
+				<td>{{ctrl.expyear}}</td>
+			</tr>
+			<tr>
+				<td>CVV Number</td>
+				<td>{{ctrl.cvv}}</td>
+			</tr>
+		</table>
+		<button class="btn btn-primary" ng-click="ctrl.edit()">Edit</button>
+		<button class="btn btn-primary" ng-click="ctrl.submitReservation()"
+			ng-disabled="ctrl.clicked">Submit</button>
+		<br /> <br />
+	</div>
+</form>
+

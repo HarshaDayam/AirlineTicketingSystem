@@ -1,0 +1,74 @@
+<div class="col-lg-6">
+	<label>Enter your confirmation number:</label> <input type="text"
+		ng-model="ctrl.number" class="form-control"> <br /> <label>Name:</label>
+	<input type="text" ng-model="ctrl.name" class="form-control"> <br />
+	<button ng-model="submit" class="btn btn-default"
+		ng-click="ctrl.getReservationDetails()">Submit</button>
+</div>
+<div class="col-lg-8">
+	<br />
+	<div ng-if="ctrl.details">
+		<h2 ng-if="ctrl.details.cancelled">This Reservation is Cancelled</h2>
+
+		<table class="table table-striped table-hover">
+			<thead class="header">
+				<tr>
+					<th>Reservation Details</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+					<td>Customer Name:</td>
+					<td>{{ctrl.details.customerName}}</td>
+				</tr>
+				<tr>
+					<td>Departure Date:</td>
+					<td>{{ctrl.details.departureDate | date: 'MM/dd/yyyy'}}</td>
+				</tr>
+				<tr>
+					<td>Arrive:</td>
+					<td>{{ctrl.details.origin +" at "+ ctrl.details.arrivalTime}}</td>
+				</tr>
+				<tr>
+					<td>Depart:</td>
+					<td>{{ctrl.details.destination +" at "+
+						ctrl.details.departureTime}}</td>
+				</tr>
+				<tr>
+					<td>Duration:</td>
+					<td>{{ctrl.details.duration}}</td>
+				</tr>
+				<tr>
+					<td>Miles:</td>
+					<td>{{ctrl.details.distance}}</td>
+				</tr>
+				<tr>
+					<td>Passengers:</td>
+					<td>{{ctrl.details.passengers}}</td>
+				</tr>
+				<tr>
+					<td>Meal Plan:</td>
+					<td>{{ctrl.details.mealPlan}}</td>
+				</tr>
+				<tr>
+					<td ng-if="ctrl.details.cancelled">Cancel Date</td>
+					<td ng-if="ctrl.details.cancelled">{{ctrl.details.cancelledDate
+						| date: 'MM/dd/yyyy'}}</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+		<div
+			ng-if="!ctrl.details.cancelled && !ctrl.checkPast(ctrl.details.departureDate)"
+			ng-show="!ctrl.details.seatSelected||index.userLoggedIn">
+			<button class="btn btn-default" ng-click="ctrl.cancelflight()">Cancel
+				Reservation</button>
+		</div>
+	</div>
+
+</div>
+<br />
+<br />

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="include/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="include/css/Styles.css">
+<title>Airline Ticketing System</title>
+</head>
+<body ng-controller="indexController as index">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/">SouthEast Airlines</a>
+			</div>
+
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-2">
+				<ul class="nav navbar-nav" ng-if="!index.adminLoggedIn">
+					<li class="active"><a href="#/">Search </a></li>
+					<li><a href="#/checkin">Checkin</a></li>
+					<li><a href="#/cancelreservation">Cancel Ticket</a></li>
+					<li ng-if="index.userLoggedIn"><a href="#/myreservations">My
+							Reservations</a></li>
+
+				</ul>
+
+				<ul class="nav navbar-nav" ng-if="index.adminLoggedIn">
+					<li><a href="#/admin/addflight">Add Flight</a></li>
+					<li><a href="#/admin/addairport">Add Airports</a></li>
+					<li><a href="#/admin/airports">View Airports</a></li>
+				</ul>
+
+				<form class="navbar-form navbar-right" role="search"
+					ng-if="!index.userLoggedIn">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Username"
+							name="s-user" id="s-user" ng-model="index.data.username" /> <input
+							type="password" class="form-control" placeholder="Password"
+							name="s-pass" id="s-pass" ng-model="index.data.password" />
+						<button type="submit" class="btn btn-default"
+							ng-click="index.login()">Submit</button>
+					</div>
+
+				</form>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a ng-click="index.logout()" ng-if="index.userLoggedIn">Logout</a>
+					<li><a href="#/register" ng-if="!index.userLoggedIn"> Signup</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+
+
+
+	<div class="container">
+		<h3 ng-if="index.loggedInUser">Welcome {{index.loggedInUser}}!</h3>
+		<div ng-view></div>
+		<br />
+		<br />
+		<br />
+	</div>
+	
+	<script src="include/js/lib/jquery1.12.4.js"></script>
+	<script src="include/js/lib/angular.js"></script>
+	<script src="include/js/lib/angular-route.min.js"></script>
+	<script src="include/js/routes.js"></script>
+	<script src="include/js/searchController.js"></script>
+	<script src="include/js/reservationController.js"></script>
+	<script src="include/js/seatSelectionDirective.js"></script>
+	<script src="include/js/seatController.js"></script>
+	<script src="include/js/checkinController.js"></script>
+	<script src="include/js/bookingConfirmationController.js"></script>
+	<script src="include/js/cancelReservationController.js"></script>
+	<script src="include/js/admin/addFlightController.js"></script>
+	<script src="include/js/admin/addAirportController.js"></script>
+	<script src="include/js/admin/showAirportsController.js"></script>
+	<script src="include/js/indexController.js"></script>
+	<script src="include/js/myReservationsController.js"></script>
+	<script src="include/js/registrationController.js"></script>
+
+</body>
+</html>

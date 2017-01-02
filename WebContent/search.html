@@ -1,0 +1,187 @@
+
+<h2 align="center">Find Your Flights</h2>
+
+<div id="myDIV">
+	<form ng-submit="ctrl.search()" name="searchForm" novalidate>
+		<table id="mainTable" width="70%" style="align: center;">
+			<thead>
+				<th color="blue"><img src="include/css/images/logo.jpg"
+					width="25px" height="25px">Flight</th>
+			</thead>
+			<tr>
+				<td>One-way <input type="radio" value="oneway" name="book"
+					ng-model="ctrl.trip" /> Round-trip <input type="radio"
+					value="round" ng-model="ctrl.trip" name="book" /></td>
+			</tr>
+			<tr>
+				<td>From <select ng-model="ctrl.selectAirportFrom" required
+					class="form-control" name="fromairport"
+					ng-options="airport.city for airport in ctrl.airports track by airport.airportCode">
+						<option value="">Select Airport</option>
+				</select>
+					<p class="error-message"
+						ng-if="searchForm.fromairport.$invalid && searchForm.$submitted">
+						<span ng-show="searchForm.fromairport.$error.required">From
+							airport is required.</span>
+					</p>
+				</td>
+
+				<td>To <select ng-model="ctrl.selectAirportTo" required
+					class="form-control" name="toairport"
+					ng-options="airport.city for airport in ctrl.airports track by airport.airportCode">
+						<option value="">Select Airport</option>
+				</select>
+					<p class="error-message"
+						ng-if="searchForm.toairport.$invalid && searchForm.$submitted">
+						<span ng-show="searchForm.toairport.$error.required">To
+							airport is required.</span>
+					</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>Departure date <input type="date" required name="deptdate"
+					class="form-control" ng-model="ctrl.deptDate" min-date="ctrl.startDate" />
+					<p class="error-message"
+						ng-if="searchForm.deptdate.$invalid && searchForm.$submitted">
+						<span ng-show="searchForm.deptdate.$error.required">Departure
+							date is required.</span>
+							<span ng-show="searchForm.deptdate.$error.minDate">Select date after {{ ctrl.startDate | date:'MM/dd/yyyy' }}.</span>
+					</p>
+				</td>
+				<td>Return date <input type="date" name="returndate"
+					ng-required="ctrl.trip !== 'oneway'" ng-model="ctrl.returnDate"
+					ng-disabled="ctrl.trip === 'oneway'" class="form-control" />
+					<p class="error-message"
+						ng-if="ctrl.trip !== 'oneway' && searchForm.returndate.$invalid && searchForm.$submitted">
+						<span ng-show="searchForm.returndate.$error.required">Departure
+							date is required.</span>
+							<span ng-show="searchForm.deptdate.$error.minDate">Select date after {{ ctrl.deptDate | date:'MM/dd/yyyy' }}.</span>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>Number of Passengers <input type="number" required
+					name="noofpass" class="form-control" ng-model="ctrl.passengers"
+					max="5" min="1">
+					<p class="error-message"
+						ng-if="searchForm.noofpass.$invalid && searchForm.$submitted">
+						<span ng-show="searchForm.noofpass.$error.required">Number
+							of Passengers is required.</span> <span
+							ng-show="searchForm.noofpass.$error.min || searchForm.noofpass.$error.max">Value
+							should be between 1 and 5.</span>
+					</p>
+				</td>
+				<td>Class <select ng-model="ctrl.ticketClass" required
+					class="form-control" name="class">
+						<option value="">-Select-</option>
+						<option value="Economy">Economy</option>
+						<option value="FirstClass">First Class</option>
+				</select>
+					<p class="error-message"
+						ng-if="searchForm.class.$invalid && searchForm.$submitted">
+						<span ng-show="searchForm.class.$error.required">Departure
+							date is required.</span>
+					</p>
+
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" class="btn btn-primary" value="Search"></td>
+			</tr>
+		</table>
+			</form>
+		<div ng-if="ctrl.searchResult">
+			<h2>{{ctrl.selectAirportFrom.city + ' to ' +
+				ctrl.selectAirportTo.city}}</h2>
+
+			<table class="table table-striped table-hover" ng-if="ctrl.searchResult.length">
+				<thead>
+					<tr>
+						<th>Origin</th>
+						<th>Destination</th>
+						<th>Flight Number</th>
+						<th>Departure Time</th>
+						<th>Arrival Time</th>
+						<th>Departure Date</th>
+						<th>Duration</th>
+						<th>Price</th>
+						<th>Select Your Ticket</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="f in ctrl.searchResult">
+						<td>{{f.origin}}</td>
+						<td>{{f.destination}}</td>
+						<td>{{f.flightNumber}}</td>
+						<td>{{f.departureTime}}</td>
+						<td>{{f.arrivalTime}}</td>
+						<td>{{f.deptDate | date: 'MM/dd/yyyy'}}</td>
+						<td>{{f.duration}}</td>
+						<td>{{f.totalPrice}}</td>
+						<td><input type="radio" name="select" ng-value="f"
+							ng-model="ctrl.selectoneway" /> Select &nbsp; &nbsp; <span
+							class="seats-left"
+							ng-if="ctrl.ticketClass === 'Economy' && f.economySeats <=5">Only
+								{{f.economySeats}} Seats Left</span> <span class="seats-left"
+							ng-if="ctrl.ticketClass === 'FirstClass' && f.firstClassSeats <=5">Only
+								{{f.firstClassSeats}} Seats Left</span></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div ng-if="!ctrl.searchResult.length" class="no-data">
+					<span> No Flights were found on this date from {{ctrl.selectAirportFrom.city  + ' to ' + ctrl.selectAirportTo.city}}</span>
+			</div>
+		</div>
+
+		<div ng-if="ctrl.searchResult2">
+			<h2>{{ctrl.selectAirportTo.city + ' to ' +
+				ctrl.selectAirportFrom.city}}</h2>
+
+			<table class="table table-striped table-hover" ng-if="ctrl.searchResult2.length">
+				<thead>
+					<tr>
+						<th>Origin</th>
+						<th>Destination</th>
+						<th>Flight Number</th>
+						<th>Departure Time</th>
+						<th>Arrival Time</th>
+						<th>Departure Date</th>
+						<th>Duration</th>
+						<th>Price</th>
+						<th>Select your Ticket</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="g in ctrl.searchResult2">
+						<td>{{g.origin}}</td>
+						<td>{{g.destination}}</td>
+						<td>{{g.flightNumber}}</td>
+						<td>{{g.departureTime}}</td>
+						<td>{{g.arrivalTime}}</td>
+						<td>{{g.deptDate | date: 'MM/dd/yyyy'}}</td>
+						<td>{{g.duration}}</td>
+						<td>{{g.totalPrice}}</td>
+						<td><input type="radio" name="select2" ng-value="g"
+							ng-model="ctrl.selectreturn" /> Select &nbsp; &nbsp; <span
+							class="seats-left"
+							ng-if="ctrl.ticketClass === 'Economy' && g.economySeats <=5">Only
+								{{g.economySeats}} Seats Left</span> <span class="seats-left"
+							ng-if="ctrl.ticketClass === 'FirstClass' && g.firstClassSeats <=5">Only
+								{{g.firstClassSeats}} Seats Left</span></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div ng-if="ctrl.searchResult2.length === 0" class="no-data">
+					<span> No Flights were found on this date from {{ctrl.selectAirportTo.city + ' to ' + ctrl.selectAirportFrom.city}}</span>
+			</div>
+		</div>
+
+	<a class="book btn btn-primary" ng-if="ctrl.searchResult.length"
+		style="color: black; background: #e7e7e7; padding: 15px 32px; display: inline-block; font-size: 16px; text-decoration: none;"
+		ng-click="ctrl.book()"> Book Now </a>
+</div>
+<br />
+<br />

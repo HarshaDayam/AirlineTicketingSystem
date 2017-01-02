@@ -1,0 +1,101 @@
+<div>
+	<div class="col-lg-6">
+		<label>Enter your confirmation number:</label> <input type="text"
+			ng-model="ctrl.number" class="form-control"> <br /> 
+	    <label>Name:</label>
+		<input type="text" ng-model="ctrl.name" class="form-control">
+		<br />
+		<button class="btn btn-default" ng-click="ctrl.getReservation()">
+			Submit</button>
+	</div>
+	
+	<div class="col-lg-8">
+		<br />
+		<table ng-if="ctrl.details" class="table table-striped content-table">
+			<thead class="header">
+			<h2 ng-if="ctrl.details.cancelled">This Reservation is Cancelled</h2>
+				<tr>
+					<th>Reservation Details</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody >
+
+				<tr>
+					<td>Customer Name:</td>
+					<td>{{ctrl.details.customerName}}</td>
+				</tr>
+				<tr>
+					<td>Departure Date:</td>
+					<td>{{ctrl.details.departureDate | date: 'MM/dd/yyyy'}}</td>
+				</tr>
+				<tr>
+					<td>Arrive:</td>
+					<td>{{ctrl.details.origin +" at "+ ctrl.details.arrivalTime}}</td>
+				</tr>
+				<tr>
+					<td>Depart:</td>
+					<td>{{ctrl.details.destination +" at "+
+						ctrl.details.departureTime}}</td>
+				</tr>
+				<tr>
+					<td>Duration:</td>
+					<td>{{ctrl.details.duration}}</td>
+				</tr>
+				<tr>
+					<td>Miles:</td>
+					<td>{{ctrl.details.distance}}</td>
+				</tr>
+				<tr>
+					<td>Passengers:</td>
+					<td>{{ctrl.details.passengers}}</td>
+				</tr>
+				<tr>
+					<td>Ticket Class:</td>
+					<td>{{ctrl.details.ticketClass}}</td>
+				</tr>
+				<tr>
+					<td ng-if="ctrl.details.cancelled == true">Cancel Date</td>
+					<td ng-if="ctrl.details.cancelled == true">{{ctrl.details.cancelledDate
+						| date: 'MM/dd/yyyy'}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<br /> <br />
+		<table ng-if="ctrl.details.seatSelected == true"
+			class="table table-striped content-table">
+			<tr>
+				<th>Passenger</th>
+				<th>Seat Number</th>
+			</tr>
+			<tr ng-repeat="p in ctrl.details.passenger">
+				<td>{{p.name}}</td>
+				<td>{{p.seat}}</td>
+			</tr>
+		</table>
+		<p ng-if="ctrl.details.seatSelected == false && ctrl.details.cancelled == false && !ctrl.checkPast(ctrl.details.departureDate)" >
+			Click the button to select your seats for one-way flight
+			<button class="btn btn-default pull-right" ng-click="ctrl.selectSeats()">Select
+				Seats</button>
+		</p>
+		
+		<table ng-if="ctrl.details.returnSeatSelected == true"
+			class="table table-striped content-table">
+			<tr>
+				<th>Passenger</th>
+				<th>Seat Number</th>
+			</tr>
+			<tr ng-repeat="p in ctrl.details.returnPassenger">
+				<td>{{p.name}}</td>
+				<td>{{p.seat}}</td>
+			</tr>
+		</table>
+		<p ng-if="ctrl.details.returnFlightId && ctrl.details.returnFlightId>0 && ctrl.details.returnSeatSelected == false && !ctrl.checkPast(ctrl.details.departureDate)">
+		<br/>
+			Click the button to select your seats for return flight
+			<button class="btn btn-default pull-right" ng-click="ctrl.selectReturnSeats()">Select
+				Seats</button>
+		</p>
+	</div>
+
+</div>

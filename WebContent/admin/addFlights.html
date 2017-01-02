@@ -1,0 +1,121 @@
+
+<div class="container">
+	<div class="container-login">
+	<a href="#/admin">Bback to Admin</a><br/>
+		<form class="form-horizontal" id="addFlightForm" ng-submit="ctrl.addFlight()">
+			<fieldset>
+				<legend> Add Flights  </legend>
+
+				<div class="form-group">
+					<label for="flightNum" class="col-lg-2 control-label">Flight
+						Number: </label>
+					<div class="col-lg-4">
+						<input type="text" class="form-control" id="flightNum" required
+							placeholder="Flight Number" ng-model="ctrl.data.flightNumber" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="origin" class="col-lg-2 control-label">Orgin: </label>
+					<div class="col-lg-4">
+						<select ng-model="ctrl.data.origin" id="origin" class="form-control" required
+							ng-options="airport.city for airport in ctrl.airports track by airport.airportCode">
+							<option value="">Select Origin</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="destination" class="col-lg-2 control-label">Destination: </label>
+					<div class="col-lg-4">
+						<select ng-model="ctrl.data.destination" id="destination" class="form-control" required
+							ng-options="airport.city for airport in ctrl.airports track by airport.airportCode">
+							<option value="">Select Destination</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="departureDate" class="col-lg-2 control-label">Departure Date: </label>
+					<div class="col-lg-4">
+						<input type="date" id="departureDate" required  class="form-control" ng-model="ctrl.data.deptDate" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="departTime" class="col-lg-2 control-label">Depart Time: </label>
+					<div class="col-lg-4">
+						<input type="time" id="departTime" required  class="form-control" ng-model="ctrl.data.departureTime" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="arrivalTime" class="col-lg-2 control-label">Arrival Time: </label>
+					<div class="col-lg-4">
+						<input type="time" id="arrivalTime" required class="form-control" ng-model="ctrl.data.arrivalTime" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="bprice" class="col-lg-2 control-label">Base Price: </label>
+					<div class="col-lg-4">
+						<input type="number" class="form-control" required id="bprice"
+							placeholder="Base Price" ng-model="ctrl.data.basePrice">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="distance" class="col-lg-2 control-label">Distance: </label>
+					<div class="col-lg-4">
+						<input type="number" class="form-control" id="distance"
+							placeholder="Distance" ng-model="ctrl.data.distance">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="duration" class="col-lg-2 control-label">Duration: </label>
+					<div class="col-lg-4">
+						<input type="text" class="form-control" id="duration"
+							placeholder="Duration" ng-model="ctrl.data.duration">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="ecSeats" class="col-lg-2 control-label">Economy Seats: </label>
+					<div class="col-lg-4">
+						<input type="number" class="form-control" id="ecSeats"
+							placeholder="Economy Seats" ng-model="ctrl.data.economySeats">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="fcSeats" class="col-lg-2 control-label">First Class Seats: </label>
+					<div class="col-lg-4">
+						<input type="number" class="form-control" id="fcSeats"
+							placeholder="First Class Seats" ng-model="ctrl.data.firstClassSeats">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="airlines" class="col-lg-2 control-label">Airlines: </label>
+					<div class="col-lg-4">
+						<input type="text" class="form-control" id="airlines"
+							placeholder="Airlines" ng-model="ctrl.data.airlines">
+					</div>
+				</div>
+
+				<div class="col-lg-12 ">
+					<div class="col-lg-offset-2 col-lg-3">
+						<button type="reset" class="btn btn-default">Reset</button>
+						<button type="submit" class="btn btn-primary"
+							>Submit</button>
+					</div>
+
+				</div>
+
+			</fieldset>
+			<br />
+			<br />
+		</form>
+	</div>
+</div>

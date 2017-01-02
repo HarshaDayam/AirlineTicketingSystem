@@ -1,0 +1,42 @@
+<div>
+	<h3>My Reservations</h3>
+	
+	<div class="col-lg-4">
+		<label>Search:</label> <input type="text"
+			ng-model="ctrl.search" class="form-control" />
+			<br/>
+	</div>
+	
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Confirmation Id</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Departure Date</th>
+				<th>Ticket Class</th>
+				<th>Reservation Date</th>
+				<th>Passengers</th>
+				<th>Status</th>
+				<th>Cancelled Date</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="mr in ctrl.myReservations | filter : {conformationId: ctrl.search}">
+				<td>{{mr.conformationId}}</td>
+				<td>{{mr.origin}}</td>
+				<td>{{mr.destination}}</td>
+				<td>{{mr.departureDate | date: 'MM/dd/yyyy'}}</td>
+				<td>{{mr.ticketClass}}</td>
+				<td>{{mr.reservationDate  | date: 'MM/dd/yyyy'}}</td>
+				<td>{{mr.passengers}}</td>
+				<td>{{mr.cancelledDate ? 
+				            'Cancelled' :  ctrl.checkPast(mr.departureDate) ? 'Completed': 'Scheduled'}}</td>
+				<td>{{mr.cancelledDate  | date: 'MM/dd/yyyy'}}</td>
+				<td><a ng-click="ctrl.view(mr)">View</a> &nbsp;
+				<a ng-click="ctrl.cancel(mr)" ng-if="!mr.cancelled && !ctrl.checkPast(mr.departureDate)">Cancel</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
