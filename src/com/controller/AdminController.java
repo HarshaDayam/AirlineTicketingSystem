@@ -9,9 +9,10 @@ import com.model.Airport;
 import com.model.Flight;
 import com.services.AdminService;
 
+// admin controller
 @Path("/admin")
 public class AdminController { 
-	
+	  
 	@Path("/addflight")
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
