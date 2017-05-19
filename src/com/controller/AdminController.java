@@ -9,9 +9,10 @@ import com.model.Airport;
 import com.model.Flight;
 import com.services.AdminService;
 
+// admin controller
 @Path("/admin")
-public class AdminController {
-	
+public class AdminController { 
+	  
 	@Path("/addflight")
 	@POST
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -20,7 +21,10 @@ public class AdminController {
 
 		AdminService rService = new AdminService();
 
+		System.out.println("Admin Service");
+		
 		return rService.addFlight(flight);
+		
 	}
 	
 	@Path("/addairport")
@@ -32,7 +36,7 @@ public class AdminController {
 		AdminService rService = new AdminService();
 
 		rService.addAirport(airport);
-		return true;
+		return true; 
 	}
 	
 	
