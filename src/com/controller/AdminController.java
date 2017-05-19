@@ -21,7 +21,10 @@ public class AdminController {
 
 		AdminService rService = new AdminService();
 
+		System.out.println("Admin Service");
+		
 		return rService.addFlight(flight);
+		
 	}
 	
 	@Path("/addairport")
@@ -33,7 +36,7 @@ public class AdminController {
 		AdminService rService = new AdminService();
 
 		rService.addAirport(airport);
-		return true;
+		return true; 
 	}
 	
 	
