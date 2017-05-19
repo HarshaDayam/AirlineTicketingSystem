@@ -10,7 +10,7 @@ import com.model.Flight;
 import com.services.AdminService;
 
 @Path("/admin")
-public class AdminController {
+public class AdminController { 
 	
 	@Path("/addflight")
 	@POST
